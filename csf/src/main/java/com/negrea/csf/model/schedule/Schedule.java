@@ -13,10 +13,10 @@ import java.time.LocalDate;
 public abstract class Schedule {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "local_date", nullable = false)
     private LocalDate localDate;
 
     @Enumerated(EnumType.STRING)
