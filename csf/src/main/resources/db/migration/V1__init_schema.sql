@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- Create Schedule_Wish table
 CREATE TABLE IF NOT EXISTS schedule_wish (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    local_date DATE NOT NULL,
+    date DATE NOT NULL,
     shift VARCHAR(5) NOT NULL,
     user_id BIGINT NOT NULL,
     CONSTRAINT fk_wish_user FOREIGN KEY (user_id) REFERENCES users(id)
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS schedule_wish (
 -- Create Schedule_Assigned table
 CREATE TABLE IF NOT EXISTS schedule_assigned (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    local_date DATE NOT NULL,
+    date DATE NOT NULL,
     shift VARCHAR(5) NOT NULL,
     user_id BIGINT NOT NULL,
     CONSTRAINT fk_assigned_user FOREIGN KEY (user_id) REFERENCES users(id),

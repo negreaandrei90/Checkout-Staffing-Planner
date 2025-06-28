@@ -16,8 +16,8 @@ public abstract class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "local_date", nullable = false)
-    private LocalDate localDate;
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
