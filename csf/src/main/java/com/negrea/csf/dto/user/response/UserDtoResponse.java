@@ -15,5 +15,6 @@ public class UserDtoResponse {
     private Long id;
     private String name;
     private String surname;
-    private Role role;
+    private String email;
+    private RoleDtoResponse role;
 }

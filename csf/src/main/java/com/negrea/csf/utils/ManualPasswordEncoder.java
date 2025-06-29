@@ -1,4 +1,4 @@
-package com.negrea.csf.utils.validator.schedule;
+package com.negrea.csf.utils;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,4 +1,4 @@
-package com.negrea.csf.security;
+package com.negrea.csf.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // disable CSRF for stateless APIs
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/csf/planning/**").hasRole("ADMIN")
-                        .requestMatchers("/csf/schedule/**", "/csf/wishbook/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/csf/schedule", "/csf/wishbook").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers("/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui.html",
+                                "/csf/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults()); // use default basic auth config

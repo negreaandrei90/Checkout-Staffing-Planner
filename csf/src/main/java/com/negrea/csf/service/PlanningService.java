@@ -1,5 +1,6 @@
 package com.negrea.csf.service;
 
+import com.negrea.csf.config.security.CurrentUser;
 import com.negrea.csf.dto.schedule.ShiftDto;
 import com.negrea.csf.mapper.user.UserMapper;
 import com.negrea.csf.model.schedule.ScheduleAssigned;
@@ -22,6 +23,7 @@ public class PlanningService {
     private final UserRepository userRepository;
     private final ScheduleValidator validator;
     private final UserMapper userMapper;
+    private final CurrentUser currentUser;
 
     public ShiftDto assignWish(Long wishId1, Long wishId2) {
         Optional<ScheduleWish> wish1 = wishRepository.findById(wishId1);
@@ -60,11 +62,12 @@ public class PlanningService {
     }
 
     private ScheduleAssigned createNewEntity(ScheduleWish wish) {
-        ScheduleAssigned schedule = new ScheduleAssigned();
-        schedule.setDate(wish.getDate());
-        schedule.setShift(wish.getShift());
-        schedule.setUser(wish.getUser());
-        //TODO: set assigned by logged in user
-        return schedule;
+
+        return ScheduleAssigned.builder()
+                .date(wish.getDate())
+                .shift(wish.getShift())
+                .user(wish.getUser())
+                .assignedBy(currentUser.getCurrentUser())
+                .build();
     }
 }

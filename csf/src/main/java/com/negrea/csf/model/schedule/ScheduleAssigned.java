@@ -6,11 +6,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @Table(name = "schedule_assigned")
 @Entity
+@SuperBuilder
 public class ScheduleAssigned extends Schedule {
     @ManyToOne
     @JoinColumn(name = "assigned_by")

@@ -1,8 +1,10 @@
 package com.negrea.csf.service;
 
+import com.negrea.csf.config.security.CurrentUser;
 import com.negrea.csf.dto.schedule.request.ScheduleWishDtoRequest;
 import com.negrea.csf.dto.schedule.response.ScheduleWishDtoResponse;
 import com.negrea.csf.mapper.schedule.ScheduleWishMapper;
+import com.negrea.csf.mapper.user.UserMapper;
 import com.negrea.csf.model.schedule.ScheduleWish;
 import com.negrea.csf.model.user.User;
 import com.negrea.csf.repository.ScheduleWishRepository;
@@ -18,18 +20,26 @@ public class WishbookService {
     private final UserRepository userRepository;
     private final ScheduleWishRepository wishRepository;
     private final ScheduleWishMapper wishMapper;
+    private final UserMapper userMapper;
+    private final CurrentUser currentUser;
 
     public ScheduleWishDtoResponse createWish(ScheduleWishDtoRequest request) {
-        Optional<User> employee = userRepository.findById(request.getUserId());
-        ScheduleWish newWish = wishRepository.save(wishMapper.toEntity(request));
+        User employee = currentUser.getCurrentUser();
+        ScheduleWish newWish = wishMapper.toEntity(request);
+        newWish.setUser(employee);
 
-        if(employee.isPresent()) {
-            employee.get().getWishes().add(wishMapper.toEntity(request));
-            userRepository.save(employee.get());
+        employee.getWishes().add(newWish);
+        userRepository.saveAndFlush(employee);
 
-            return wishMapper.toDto(newWish);
+        Optional<ScheduleWish> createdWish = wishRepository.findByUserAndDate(employee, request.getDate());
+
+        if(createdWish.isPresent()) {
+            ScheduleWishDtoResponse response = wishMapper.toDto(createdWish.get());
+            response.setUser(userMapper.toDto(createdWish.get().getUser()));
+
+            return response;
+        } else {
+            throw new RuntimeException("Could not create wish");
         }
-
-        return null;
     }
 }

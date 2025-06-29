@@ -1,8 +1,6 @@
 package com.negrea.csf.dto.user.request;
 
-import com.negrea.csf.model.user.Role;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,17 +11,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDtoRequest {
-    @NotBlank
-    private String name;
-
-    @NotBlank
-    private String surname;
-
-    @NotBlank
+public class LoginRequest {
     @Email
+    @NotNull
     private String email;
 
-    @NotBlank
+    @NotNull
     private String password;
 }

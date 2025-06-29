@@ -1,5 +1,6 @@
 package com.negrea.csf.dto.schedule.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.negrea.csf.model.schedule.Shift;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -15,9 +16,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ScheduleWishDtoRequest {
     @NotNull
-    private LocalDate localDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
     @NotNull
     private Shift shift;
-    @NotNull
-    private Long userId;
 }

@@ -1,5 +1,6 @@
 package com.negrea.csf.dto.schedule.response;
 
+import com.negrea.csf.dto.user.response.UserDtoResponse;
 import com.negrea.csf.model.schedule.Shift;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -15,8 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ScheduleWishDtoResponse {
     private Long id;
-    private LocalDate localDate;
+    private LocalDate date;
     private Shift shift;
-    private Long userId;
-    private Long assignedByUserId;
+    private UserDtoResponse user;
 }

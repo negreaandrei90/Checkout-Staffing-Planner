@@ -13,5 +13,11 @@ public interface ScheduleWishMapper {
 
     ScheduleWish toEntity(ScheduleWishDtoRequest request);
 
-    ScheduleWishDtoResponse toDto(ScheduleWish wish);
+    default ScheduleWishDtoResponse toDto(ScheduleWish wish) {
+        return ScheduleWishDtoResponse.builder()
+                .id(wish.getId())
+                .date(wish.getDate())
+                .shift(wish.getShift())
+                .build();
+    }
 }

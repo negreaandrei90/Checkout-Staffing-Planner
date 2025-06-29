@@ -27,6 +27,9 @@ public class ScheduleService {
         List<ScheduleAssigned> scheduleAssignedList = scheduleRepository.findByDate(date);
 
         //list not empty?
+        if(scheduleAssignedList.isEmpty()) {
+            throw new RuntimeException("Nobody is schedule for " + date);
+        }
 
         //first 2 - EARLY / last 2 - LATE
         scheduleAssignedList.sort(Comparator.comparing(ScheduleAssigned::getShift));

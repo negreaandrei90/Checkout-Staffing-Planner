@@ -2,16 +2,14 @@ package com.negrea.csf.model.schedule;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @Table(name = "schedule_wish")
 @Entity
-@Builder
-@AllArgsConstructor
+@SuperBuilder
+@NoArgsConstructor
 public class ScheduleWish extends Schedule {
 }
