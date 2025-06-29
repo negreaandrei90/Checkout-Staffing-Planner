@@ -38,4 +38,10 @@ public class GlobalExceptionHandler {
     public @ResponseBody ErrorResponse handleWishNotFoundException(WishNotFoundException ex) {
         return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     }
+
+    @ExceptionHandler(value = NotEnoughEmployeesException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public @ResponseBody ErrorResponse handleNotEnoughEmployeesException(NotEnoughEmployeesException ex) {
+        return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
+    }
 }

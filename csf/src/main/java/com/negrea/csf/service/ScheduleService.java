@@ -2,6 +2,7 @@ package com.negrea.csf.service;
 
 import com.negrea.csf.dto.schedule.ShiftDto;
 import com.negrea.csf.dto.schedule.response.ScheduleResponse;
+import com.negrea.csf.exception.NotEnoughEmployeesException;
 import com.negrea.csf.mapper.user.UserMapper;
 import com.negrea.csf.model.schedule.ScheduleAssigned;
 import com.negrea.csf.model.schedule.Shift;
@@ -50,6 +51,9 @@ public class ScheduleService {
                 .toList();
 
         if(!shiftSchedule.isEmpty()) {
+            if(shiftSchedule.size() < 2) {
+                throw new NotEnoughEmployeesException("Not enough employees are assigned to the" + shiftSchedule.get(0).getShift() + " shift on: " + shiftSchedule.get(0).getDate() + " " );
+            }
             return ShiftDto.builder()
                     .employees(userMapper.toUserScheduleDtoList(Arrays.asList(shiftSchedule.get(0).getUser(), shiftSchedule.get(1).getUser())))
                     .date(shiftSchedule.get(0).getDate())
