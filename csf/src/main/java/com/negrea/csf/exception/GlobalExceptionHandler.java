@@ -17,25 +17,25 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = InvalidWishException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public @ResponseBody ErrorResponse handleCannotSaveWishException(InvalidWishException ex) {
+    public @ResponseBody ErrorResponse handleInvalidWishException(InvalidWishException ex) {
         return new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), ex.getMessage());
     }
 
     @ExceptionHandler(value = SchedulesNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public @ResponseBody ErrorResponse handleCannotSaveWishException(SchedulesNotFoundException ex) {
+    public @ResponseBody ErrorResponse handleSchedulesNotFoundException(SchedulesNotFoundException ex) {
         return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     }
 
     @ExceptionHandler(value = UserAlreadyHasShiftException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public @ResponseBody ErrorResponse handleCannotSaveWishException(UserAlreadyHasShiftException ex) {
+    public @ResponseBody ErrorResponse handleUserAlreadyHasShiftException(UserAlreadyHasShiftException ex) {
         return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
     }
 
     @ExceptionHandler(value = WishNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public @ResponseBody ErrorResponse handleCannotSaveWishException(WishNotFoundException ex) {
+    public @ResponseBody ErrorResponse handleWishNotFoundException(WishNotFoundException ex) {
         return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     }
 }

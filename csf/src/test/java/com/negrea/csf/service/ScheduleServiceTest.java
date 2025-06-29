@@ -81,13 +81,12 @@ public class ScheduleServiceTest {
         // Arrange
         Mockito.when(scheduleRepository.findByDate(testDate)).thenReturn(List.of());
 
-        // Assert
-        RuntimeException ex = Assertions.assertThrows(
-                RuntimeException.class,
-                () -> scheduleService.getScheduleOfDay(testDate)
-        );
+        ScheduleResponse expected = ScheduleResponse.builder()
+                .earlyShift(null)
+                .lateShift(null)
+                .build();
 
-        Assertions.assertEquals("Nobody is schedule for " + testDate, ex.getMessage());
+        Assertions.assertEquals(expected, scheduleService.getScheduleOfDay(testDate));
     }
 
     @Test

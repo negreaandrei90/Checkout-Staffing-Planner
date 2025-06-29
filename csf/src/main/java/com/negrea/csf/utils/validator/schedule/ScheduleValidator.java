@@ -35,10 +35,22 @@ public class ScheduleValidator {
         List<ScheduleAssigned> scheduleUser1 = user1.getSchedule();
         List<ScheduleAssigned> scheduleUser2 = user2.getSchedule();
 
-        boolean matchingDate1 = scheduleUser1.stream()
-                .anyMatch(schedule -> schedule.getDate().equals(date));
-        boolean matchingDate2 = scheduleUser2.stream()
-                .anyMatch(schedule -> schedule.getDate().equals(date));
+        boolean matchingDate1;
+        boolean matchingDate2;
+
+        if(scheduleUser1 == null) {
+            matchingDate1 = false;
+        } else {
+            matchingDate1 = scheduleUser1.stream()
+                    .anyMatch(schedule -> schedule.getDate().equals(date));
+        }
+
+        if(scheduleUser2 == null) {
+            matchingDate2 = false;
+        } else {
+            matchingDate2 = scheduleUser2.stream()
+                    .anyMatch(schedule -> schedule.getDate().equals(date));
+        }
 
         if(matchingDate1) {
             throw new UserAlreadyHasShiftException("Employee: " + user1.getName() + " is already scheduled on " + date);

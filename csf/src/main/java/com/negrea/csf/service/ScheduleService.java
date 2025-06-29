@@ -25,7 +25,10 @@ public class ScheduleService {
 
         //list not empty (nobody is scheduled)
         if(scheduleAssignedList.isEmpty()) {
-            throw new RuntimeException("Nobody is schedule for " + date);
+            return ScheduleResponse.builder()
+                    .earlyShift(null)
+                    .lateShift(null)
+                    .build();
         }
 
         ShiftDto earlyShift = createShift(scheduleAssignedList, Shift.EARLY);

@@ -43,7 +43,16 @@ public class PlanningService {
                 employees.add(employee1);
                 employees.add(employee2);
 
+                if(employee1.getSchedule() == null) {
+                    employee1.setSchedule(new ArrayList<ScheduleAssigned>());
+                }
+
                 employee1.getSchedule().add(schedule1);
+
+                if(employee2.getSchedule() == null) {
+                    employee2.setSchedule(new ArrayList<ScheduleAssigned>());
+                }
+
                 employee2.getSchedule().add(schedule2);
 
                 userRepository.save(wish1.get().getUser());
