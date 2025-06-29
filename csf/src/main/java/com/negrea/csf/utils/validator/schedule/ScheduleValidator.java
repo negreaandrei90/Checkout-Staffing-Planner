@@ -3,10 +3,12 @@ package com.negrea.csf.utils.validator.schedule;
 import com.negrea.csf.model.schedule.ScheduleAssigned;
 import com.negrea.csf.model.schedule.ScheduleWish;
 import com.negrea.csf.model.user.User;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Component
 public class ScheduleValidator {
 
     public boolean validateAssignWish(ScheduleWish wish1, ScheduleWish wish2) {

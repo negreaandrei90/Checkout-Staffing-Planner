@@ -26,6 +26,8 @@ public class ScheduleService {
         //find employees scheduled for given day
         List<ScheduleAssigned> scheduleAssignedList = scheduleRepository.findByDate(date);
 
+        //list not empty?
+
         //first 2 - EARLY / last 2 - LATE
         scheduleAssignedList.sort(Comparator.comparing(ScheduleAssigned::getShift));
 

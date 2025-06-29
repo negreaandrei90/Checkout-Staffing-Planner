@@ -23,6 +23,12 @@ public class User {
     @Column
     private String surname;
 
+    @Column
+    private String email;
+
+    @Column
+    private String password;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;

@@ -11,6 +11,8 @@ CREATE TABLE IF NOT EXISTS users (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(25) NOT NULL,
     surname VARCHAR(25),
+    email VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
     role_id BIGINT NOT NULL,
     CONSTRAINT fk_user_role FOREIGN KEY (role_id) REFERENCES roles(id)
 );
@@ -40,7 +42,6 @@ INSERT INTO roles (name, description)
 SELECT 'ADMIN', 'Administrator role'
 WHERE NOT EXISTS
     (SELECT 1 FROM roles WHERE name = 'ADMIN');
-
 
 -- Seed role 'EMPLOYEE' inside table roles
 INSERT INTO roles (name, description)
