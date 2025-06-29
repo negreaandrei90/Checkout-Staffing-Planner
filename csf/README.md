@@ -90,6 +90,10 @@ Integration Tests: 5
 
 For unit tests, JUnit5 was used in combination with Mockito in order to mock outside entities, and they performed at a service & validators layer, while integration tests were performed at the controller layer.  
 
+If you quickly want to test the endpoints for the happy scenario, you can make use of the already existing data:
+
+Planning: wishId1 = 1, wishId2 = 2 OR wishId = 5, wishId = 6 (plan for 2025-08-30)
+Schedule: date = 2025-07-28 OR 2025-08-29
 ### Contact
 
 Name: Gheorghe-Andrei Negrea  
