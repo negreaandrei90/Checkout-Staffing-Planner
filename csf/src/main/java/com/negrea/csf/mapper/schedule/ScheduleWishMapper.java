@@ -1,7 +1,7 @@
-package com.negrea.csf.model.mapper.schedule;
+package com.negrea.csf.mapper.schedule;
 
-import com.negrea.csf.model.dto.schedule.request.ScheduleWishDtoRequest;
-import com.negrea.csf.model.dto.schedule.response.ScheduleWishDtoResponse;
+import com.negrea.csf.dto.schedule.request.ScheduleWishDtoRequest;
+import com.negrea.csf.dto.schedule.response.ScheduleWishDtoResponse;
 import com.negrea.csf.model.schedule.ScheduleWish;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

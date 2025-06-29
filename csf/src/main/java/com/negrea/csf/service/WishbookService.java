@@ -1,8 +1,8 @@
 package com.negrea.csf.service;
 
-import com.negrea.csf.model.dto.schedule.request.ScheduleWishDtoRequest;
-import com.negrea.csf.model.dto.schedule.response.ScheduleWishDtoResponse;
-import com.negrea.csf.model.mapper.schedule.ScheduleWishMapper;
+import com.negrea.csf.dto.schedule.request.ScheduleWishDtoRequest;
+import com.negrea.csf.dto.schedule.response.ScheduleWishDtoResponse;
+import com.negrea.csf.mapper.schedule.ScheduleWishMapper;
 import com.negrea.csf.model.schedule.ScheduleWish;
 import com.negrea.csf.repository.ScheduleWishRepository;
 import com.negrea.csf.repository.UserRepository;

@@ -1,4 +1,4 @@
-package com.negrea.csf.model.dto.schedule.request;
+package com.negrea.csf.dto.schedule.response;
 
 import com.negrea.csf.model.schedule.Shift;
 import jakarta.validation.constraints.NotNull;
@@ -13,11 +13,10 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ScheduleWishDtoRequest {
-    @NotNull
+public class ScheduleAssignedDtoResponse {
+    private Long id;
     private LocalDate localDate;
-    @NotNull
     private Shift shift;
-    @NotNull
     private Long userId;
+    private Long assignedByUserId;
 }

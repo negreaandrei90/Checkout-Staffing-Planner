@@ -1,6 +1,6 @@
 package com.negrea.csf.controller;
 
-import com.negrea.csf.model.dto.schedule.response.ScheduleResponse;
+import com.negrea.csf.dto.schedule.response.ScheduleResponse;
 import com.negrea.csf.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

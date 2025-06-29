@@ -1,6 +1,6 @@
-package com.negrea.csf.model.mapper.user;
+package com.negrea.csf.mapper.user;
 
-import com.negrea.csf.model.dto.user.response.UserScheduleDto;
+import com.negrea.csf.dto.user.response.UserScheduleDto;
 import com.negrea.csf.model.user.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

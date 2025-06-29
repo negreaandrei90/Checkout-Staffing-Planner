@@ -1,11 +1,10 @@
 package com.negrea.csf.service;
 
-import com.negrea.csf.model.dto.schedule.ShiftDto;
-import com.negrea.csf.model.mapper.user.UserMapper;
+import com.negrea.csf.dto.schedule.ShiftDto;
+import com.negrea.csf.mapper.user.UserMapper;
 import com.negrea.csf.model.schedule.ScheduleAssigned;
 import com.negrea.csf.model.schedule.ScheduleWish;
 import com.negrea.csf.model.user.User;
-import com.negrea.csf.repository.ScheduleAssignedRepository;
 import com.negrea.csf.repository.ScheduleWishRepository;
 import com.negrea.csf.repository.UserRepository;
 import com.negrea.csf.utils.validator.schedule.ScheduleValidator;
@@ -19,7 +18,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class PlanningService {
-    //private final ScheduleAssignedRepository scheduleRepository;
     private final ScheduleWishRepository wishRepository;
     private final UserRepository userRepository;
     private final ScheduleValidator validator;
@@ -47,7 +45,7 @@ public class PlanningService {
                 userRepository.save(wish1.get().getUser());
                 userRepository.save(wish2.get().getUser());
 
-                ShiftDto shift = ShiftDto.builder()
+                return ShiftDto.builder()
                         .employees(userMapper.toUserScheduleDtoList(employees))
                         .shift(schedule1.getShift())
                         .build();
@@ -59,7 +57,6 @@ public class PlanningService {
             //no wish
             return null;
         }
-        return null;
     }
 
     private ScheduleAssigned createNewEntity(ScheduleWish wish) {

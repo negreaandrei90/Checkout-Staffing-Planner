@@ -1,6 +1,5 @@
-package com.negrea.csf.model.dto.user.request;
+package com.negrea.csf.dto.user.response;
 
-import com.negrea.csf.model.user.Role;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,13 +11,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDtoRequest {
-    @NotBlank
+public class RoleDtoResponse {
+    private Long id;
     private String name;
-
-    @NotBlank
-    private String surname;
-
-    @NotNull
-    private Long roleId;
+    private String description;
 }

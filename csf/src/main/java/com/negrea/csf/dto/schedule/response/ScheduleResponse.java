@@ -1,6 +1,6 @@
-package com.negrea.csf.model.dto.schedule.response;
+package com.negrea.csf.dto.schedule.response;
 
-import com.negrea.csf.model.dto.schedule.ShiftDto;
+import com.negrea.csf.dto.schedule.ShiftDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -14,8 +14,8 @@ public class ScheduleValidator {
         User employee2 = wish2.getUser();
         LocalDate date;
 
-        if(validateLocalDateEquals(wish1.getLocalDate(), wish2.getLocalDate())){
-            date = wish1.getLocalDate();
+        if(validateLocalDateEquals(wish1.getDate(), wish2.getDate())){
+            date = wish1.getDate();
             return validateNotSameEmployee(employee1, employee2) &&
                     validateNotAlreadyScheduledForDay(employee1, employee2, date) &&
                     validateSameShift(wish1, wish2);
@@ -33,9 +33,9 @@ public class ScheduleValidator {
         List<ScheduleAssigned> scheduleUser2 = user2.getSchedule();
 
         boolean matchingDate1 = scheduleUser1.stream()
-                .anyMatch(schedule -> schedule.getLocalDate().equals(date));
+                .anyMatch(schedule -> schedule.getDate().equals(date));
         boolean matchingDate2 = scheduleUser2.stream()
-                .anyMatch(schedule -> schedule.getLocalDate().equals(date));
+                .anyMatch(schedule -> schedule.getDate().equals(date));
 
         return !matchingDate1 && !matchingDate2 ? true : false;
     }

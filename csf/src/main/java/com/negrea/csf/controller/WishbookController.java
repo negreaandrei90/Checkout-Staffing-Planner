@@ -1,7 +1,7 @@
 package com.negrea.csf.controller;
 
-import com.negrea.csf.model.dto.schedule.request.ScheduleWishDtoRequest;
-import com.negrea.csf.model.dto.schedule.response.ScheduleWishDtoResponse;
+import com.negrea.csf.dto.schedule.request.ScheduleWishDtoRequest;
+import com.negrea.csf.dto.schedule.response.ScheduleWishDtoResponse;
 import com.negrea.csf.service.WishbookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

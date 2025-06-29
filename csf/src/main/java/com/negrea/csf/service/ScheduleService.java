@@ -1,8 +1,8 @@
 package com.negrea.csf.service;
 
-import com.negrea.csf.model.dto.schedule.ShiftDto;
-import com.negrea.csf.model.dto.schedule.response.ScheduleResponse;
-import com.negrea.csf.model.mapper.user.UserMapper;
+import com.negrea.csf.dto.schedule.ShiftDto;
+import com.negrea.csf.dto.schedule.response.ScheduleResponse;
+import com.negrea.csf.mapper.user.UserMapper;
 import com.negrea.csf.model.schedule.ScheduleAssigned;
 import com.negrea.csf.model.user.User;
 import com.negrea.csf.repository.ScheduleAssignedRepository;

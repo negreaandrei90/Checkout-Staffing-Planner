@@ -1,21 +1,24 @@
-package com.negrea.csf.model.dto.user.response;
+package com.negrea.csf.dto.user.request;
 
 import com.negrea.csf.model.user.Role;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDtoResponse {
-    private Long id;
+public class UserDtoRequest {
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String surname;
-    private Role role;
-    //private List<ScheduleWish> wishes;
-    //private List<ScheduleAssigned> schedule;
+
+    @NotNull
+    private Long roleId;
 }

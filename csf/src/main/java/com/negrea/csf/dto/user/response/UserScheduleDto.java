@@ -1,4 +1,4 @@
-package com.negrea.csf.model.dto.user.response;
+package com.negrea.csf.dto.user.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
