@@ -32,6 +32,7 @@ This is a Spring Boot application for managing employee's shifts, including sche
 with username = 'postgres' and password = 'root' (or if you do set them up differently, modify the 'application.properties' file)
 
 At first execution, flyway will run 'V1__init_schema.sql' which creates the tables for the entities and then 'V2__seed_users.sql' which populates the database with a total of 7 users (1 admin + 6 employees)
+and 'V3__seed_wishes_and_schedule' will populate the database with a couple of entries as wishes and schedule/shifts already assigned to the employees
 
 ### Authentication & Security
     
