@@ -26,16 +26,17 @@ public class WishbookService {
     public ScheduleWishDtoResponse createWish(ScheduleWishDtoRequest request) {
         User employee = currentUser.getCurrentUser();
         ScheduleWish newWish = wishMapper.toEntity(request);
-        newWish.setUser(employee);
+        newWish.setUser(employee);  //assign user to wish
 
-        employee.getWishes().add(newWish);
+        employee.getWishes().add(newWish);  //assign wish to user's collection of wishes
         userRepository.saveAndFlush(employee);
 
+        //search for the newly created wish
         Optional<ScheduleWish> createdWish = wishRepository.findByUserAndDate(employee, request.getDate());
 
         if(createdWish.isPresent()) {
             ScheduleWishDtoResponse response = wishMapper.toDto(createdWish.get());
-            response.setUser(userMapper.toDto(createdWish.get().getUser()));
+            response.setUser(userMapper.toDto(createdWish.get().getUser()));    //setting nested dto
 
             return response;
         } else {

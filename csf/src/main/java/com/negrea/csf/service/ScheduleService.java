@@ -23,7 +23,7 @@ public class ScheduleService {
         //find schedules of employees for given day
         List<ScheduleAssigned> scheduleAssignedList = scheduleRepository.findByDate(date);
 
-        //list not empty (nobody is scheduled)
+        //list not empty = nobody is scheduled for the date
         if(scheduleAssignedList.isEmpty()) {
             return ScheduleResponse.builder()
                     .earlyShift(null)

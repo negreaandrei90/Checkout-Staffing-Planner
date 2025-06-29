@@ -28,17 +28,19 @@ public class PlanningService {
     private final CurrentUser currentUser;
 
     public ShiftDto assignWish(Long wishId1, Long wishId2) {
+        //retrieve wishes with given ID
         Optional<ScheduleWish> wish1 = wishRepository.findById(wishId1);
         Optional<ScheduleWish> wish2 = wishRepository.findById(wishId2);
-        boolean wishAssigned;
 
         if(wish1.isPresent() && wish2.isPresent()) {
             if(validator.validateAssignWish(wish1.get(), wish2.get())) {
+                //if validations pass, create ScheduleAssigned entities
                 ScheduleAssigned schedule1 = createNewEntity(wish1.get());
                 ScheduleAssigned schedule2 = createNewEntity(wish2.get());
 
                 User employee1 = wish1.get().getUser();
                 User employee2 = wish2.get().getUser();
+
                 List<User> employees = new ArrayList<>();
                 employees.add(employee1);
                 employees.add(employee2);
@@ -55,8 +57,8 @@ public class PlanningService {
 
                 employee2.getSchedule().add(schedule2);
 
-                userRepository.save(wish1.get().getUser());
-                userRepository.save(wish2.get().getUser());
+                userRepository.save(employee1);
+                userRepository.save(employee2);
 
                 return ShiftDto.builder()
                         .employees(userMapper.toUserScheduleDtoList(employees))
@@ -71,6 +73,9 @@ public class PlanningService {
         }
     }
 
+    /*
+    Method to convert from Wish to Schedule
+     */
     private ScheduleAssigned createNewEntity(ScheduleWish wish) {
 
         return ScheduleAssigned.builder()
