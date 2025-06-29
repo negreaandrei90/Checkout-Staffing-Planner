@@ -4,10 +4,7 @@ import com.negrea.csf.dto.schedule.ShiftDto;
 import com.negrea.csf.service.PlanningService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/csf/planning")
@@ -16,8 +13,7 @@ public class PlanningController {
     private final PlanningService service;
 
     @PostMapping
-    //@PreAuthorize
-    public ResponseEntity<ShiftDto> assignWish(@PathVariable Long wishId1, @PathVariable Long wishId2) {
+    public ResponseEntity<ShiftDto> assignWish(@RequestParam("wish1") Long wishId1, @RequestParam("wish2") Long wishId2) {
         ShiftDto response = service.assignWish(wishId1, wishId2);
         return ResponseEntity.ok(response);
     }

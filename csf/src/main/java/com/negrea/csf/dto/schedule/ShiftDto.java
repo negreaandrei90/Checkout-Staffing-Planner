@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Builder
@@ -16,4 +17,5 @@ import java.util.List;
 public class ShiftDto {
     private List<UserScheduleDto> employees;
     private Shift shift;
+    private LocalDate date;
 }

@@ -4,59 +4,56 @@ import com.negrea.csf.dto.schedule.ShiftDto;
 import com.negrea.csf.dto.schedule.response.ScheduleResponse;
 import com.negrea.csf.mapper.user.UserMapper;
 import com.negrea.csf.model.schedule.ScheduleAssigned;
-import com.negrea.csf.model.user.User;
+import com.negrea.csf.model.schedule.Shift;
 import com.negrea.csf.repository.ScheduleAssignedRepository;
-import com.negrea.csf.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
-    private final UserRepository userRepository;
     private final ScheduleAssignedRepository scheduleRepository;
     private final UserMapper userMapper;
 
     public ScheduleResponse getScheduleOfDay(LocalDate date) {
-        //find employees scheduled for given day
+        //find schedules of employees for given day
         List<ScheduleAssigned> scheduleAssignedList = scheduleRepository.findByDate(date);
 
-        //list not empty?
+        //list not empty (nobody is scheduled)
         if(scheduleAssignedList.isEmpty()) {
             throw new RuntimeException("Nobody is schedule for " + date);
         }
 
-        //first 2 - EARLY / last 2 - LATE
-        scheduleAssignedList.sort(Comparator.comparing(ScheduleAssigned::getShift));
-
-        List<User> earlyEmployees = new ArrayList<User>();
-        earlyEmployees.add(scheduleAssignedList.get(0).getUser());
-        earlyEmployees.add(scheduleAssignedList.get(1).getUser());
-
-        List<User> lateEmployees = new ArrayList<User>();
-        lateEmployees.add(scheduleAssignedList.get(2).getUser());
-        lateEmployees.add(scheduleAssignedList.get(3).getUser());
-
-        //creating the DTOs for both shifts
-        ShiftDto earlyShift = ShiftDto.builder()
-                .employees(userMapper.toUserScheduleDtoList(earlyEmployees))
-                .shift(scheduleAssignedList.get(0).getShift())
-                .build();
-
-        ShiftDto lateShift = ShiftDto.builder()
-                .employees(userMapper.toUserScheduleDtoList(lateEmployees))
-                .shift(scheduleAssignedList.get(0).getShift())
-                .build();
+        ShiftDto earlyShift = createShift(scheduleAssignedList, Shift.EARLY);
+        ShiftDto lateShift = createShift(scheduleAssignedList, Shift.LATE);
 
         //creating final response with both shifts
         return ScheduleResponse.builder()
                 .earlyShift(earlyShift)
                 .lateShift(lateShift)
                 .build();
+    }
+
+    /*
+    Create DTO per shift (EARLY/LATE), after filtering the day's schedules depending on shift type
+     */
+    private ShiftDto createShift(List<ScheduleAssigned> scheduleAssignedList, Shift shift) {
+        List<ScheduleAssigned> shiftSchedule = scheduleAssignedList.stream()
+                .filter(schedule -> schedule.getShift().equals(shift))
+                .toList();
+
+        if(!shiftSchedule.isEmpty()) {
+            return ShiftDto.builder()
+                    .employees(userMapper.toUserScheduleDtoList(Arrays.asList(shiftSchedule.get(0).getUser(), shiftSchedule.get(1).getUser())))
+                    .date(shiftSchedule.get(0).getDate())
+                    .shift(shift)
+                    .build();
+        } else {
+            return null;
+        }
     }
 }

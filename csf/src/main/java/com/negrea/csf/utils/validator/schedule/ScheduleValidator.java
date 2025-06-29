@@ -1,5 +1,6 @@
 package com.negrea.csf.utils.validator.schedule;
 
+import com.negrea.csf.exception.UserAlreadyHasShiftException;
 import com.negrea.csf.model.schedule.ScheduleAssigned;
 import com.negrea.csf.model.schedule.ScheduleWish;
 import com.negrea.csf.model.user.User;
@@ -38,6 +39,12 @@ public class ScheduleValidator {
                 .anyMatch(schedule -> schedule.getDate().equals(date));
         boolean matchingDate2 = scheduleUser2.stream()
                 .anyMatch(schedule -> schedule.getDate().equals(date));
+
+        if(matchingDate1) {
+            throw new UserAlreadyHasShiftException("Employee: " + user1.getName() + " is already scheduled on " + date);
+        } else if(matchingDate2) {
+            throw new UserAlreadyHasShiftException("Employee: " + user2.getName() + " is already scheduled on " + date);
+        }
 
         return !matchingDate1 && !matchingDate2 ? true : false;
     }

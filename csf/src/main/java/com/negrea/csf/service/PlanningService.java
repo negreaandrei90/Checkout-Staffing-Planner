@@ -2,6 +2,8 @@ package com.negrea.csf.service;
 
 import com.negrea.csf.config.security.CurrentUser;
 import com.negrea.csf.dto.schedule.ShiftDto;
+import com.negrea.csf.exception.InvalidWishException;
+import com.negrea.csf.exception.WishNotFoundException;
 import com.negrea.csf.mapper.user.UserMapper;
 import com.negrea.csf.model.schedule.ScheduleAssigned;
 import com.negrea.csf.model.schedule.ScheduleWish;
@@ -50,14 +52,13 @@ public class PlanningService {
                 return ShiftDto.builder()
                         .employees(userMapper.toUserScheduleDtoList(employees))
                         .shift(schedule1.getShift())
+                        .date(schedule1.getDate())
                         .build();
             } else {
-                //not valid
-                return null;
+                throw new InvalidWishException("The wishes cannot be planned together");
             }
         } else {
-            //no wish
-            return null;
+            throw new WishNotFoundException("Could not find the wishes");
         }
     }
 

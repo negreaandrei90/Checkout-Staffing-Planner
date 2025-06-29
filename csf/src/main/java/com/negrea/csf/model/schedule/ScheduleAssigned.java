@@ -13,6 +13,8 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "schedule_assigned")
 @Entity
 @SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ScheduleAssigned extends Schedule {
     @ManyToOne
     @JoinColumn(name = "assigned_by")
