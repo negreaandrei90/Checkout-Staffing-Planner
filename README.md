@@ -31,9 +31,6 @@ This is a Spring Boot application for managing employee's shifts, including sche
 **!** Before running the application, set up a postgres server on **localhost:5432** named "**csf**"  
 with username = 'postgres' and password = 'root' (or if you do set them up differently, modify the 'application.properties' file)
 
-At first execution, flyway will run 'V1__init_schema.sql' which creates the tables for the entities and then 'V2__seed_users.sql' which populates the database with a total of 7 users (1 admin + 6 employees)
-and 'V3__seed_wishes_and_schedule' will populate the database with a couple of entries as wishes and schedule/shifts already assigned to the employees
-
 ### Authentication & Security
     
 The application used Basic Auth, requesting credentials with each request via Swagger UI's "Authorize" button or by making use of a tool like Postman  
@@ -51,7 +48,7 @@ Admin Account:
 - password: admin  
 
 Employee Account:
-- email: employee<nr>@employee.com (ex. 'employee1@employee.com')
+- email: employee(nr)@employee.com (ex. 'employee1@employee.com')
 - password: employee
 
 Passwords are hashed before being inserted in the database via 'BCrypt' function.
@@ -81,11 +78,14 @@ Passwords are hashed before being inserted in the database via 'BCrypt' function
 
 ### Database Migration
 
-Flyway automatically applies migration on startup, and I've taken the time to seed the tables, meaning the application will start with a base pool of users (both employees and admins), schedules and wishes.
+Flyway automatically applies migration on startup, and I've taken the time to seed the tables, meaning the application will start with a base pool of users (both employees and admins), schedules and wishes.  
+
+At first execution, flyway will run 'V1__init_schema.sql' which creates the tables for the entities and then 'V2__seed_users.sql' which populates the database with a total of 7 users (1 admin + 6 employees)
+and 'V3__seed_wishes_and_schedule' will populate the database with a couple of entries as wishes and schedule/shifts already assigned to the employees
 
 ### Testing
 
-For testing purposes, unit and integration tests were developed to both test unit functionality and application flow between services.
+For testing purposes, unit and integration tests were developed to both test unit functionality and application flow between services.  
 Unit Tests: 15  
 Integration Tests: 5
 
@@ -93,8 +93,8 @@ For unit tests, JUnit5 was used in combination with Mockito in order to mock out
 
 If you quickly want to test the endpoints for the happy scenario, you can make use of the already existing data:
 
-Planning: wishId1 = 1, wishId2 = 2 OR wishId = 5, wishId = 6 (plan for 2025-08-30)
-Schedule: date = 2025-07-28 OR 2025-08-29
+Planning: wishId1 = 1, wishId2 = 2 OR wishId = 5, wishId = 6 (plan for 2025-08-30)  
+Schedule: date = 2025-07-28 OR 2025-08-29  
 ### Contact
 
 Name: Gheorghe-Andrei Negrea  
